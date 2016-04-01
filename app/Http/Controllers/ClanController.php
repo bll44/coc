@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\ClashApi;
+use App\Clan;
 
 class ClanController extends Controller
 {
@@ -24,7 +25,9 @@ class ClanController extends Controller
     	$tag = '#' . trim(strtoupper(str_replace('#', '', $http->clan_tag)));
     	$ch = new ClashApi;
     	$clan = $ch->getClanByTag($tag);
+    	
+    	session()->put('clan_search_result', $clan);
 
-    	return;
+    	return view('clans/clan_search_results', compact('clan'));
     }
 }

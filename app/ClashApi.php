@@ -14,12 +14,14 @@ class ClashApi extends Model
 		$this->curl = new \anlutro\cURL\cURL;
 	}
 
-	public function getClanByTag($tag, Clan $clan)
+	public function getClanByTag($tag)
 	{
 		$request = $this->curl->newJsonRequest('GET', 'https://api.clashofclans.com/v1/clans/%23YVUV92R', array())
 									->setHeader('authorization', 'Bearer ' . env('API_KEY'));
 		$response = $request->send();
 		$dcd = json_decode($response, true);
+
+		$clan = new Clan;
 
 		$clan->tag = $dcd['tag'];
 		$clan->name = $dcd['name'];
@@ -36,5 +38,7 @@ class ClashApi extends Model
 		$clan->clanPoints = $dcd['clanPoints'];
 		$clan->requiredTrophies = $dcd['requiredTrophies'];
 		$clan->members = $dcd['members'];
+
+		return $clan;
 	}
 }
