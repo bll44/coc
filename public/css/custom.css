@@ -1,6 +1,19 @@
 body {
 	padding-top: 30px;
+	font-family: 'Cabin', sans-serif;
 }
 .transformUp {
 	text-transform: uppercase;
+}
+a.no-decoration:hover,
+a.no-decoration:active,
+a.no-decoration:visited,
+a.no-decoration:link {
+	text-decoration: none;
+}
+.no-display {
+	display: none;
+}
+#toggle-clan-details-btn {
+	margin-bottom: 10px;
 }

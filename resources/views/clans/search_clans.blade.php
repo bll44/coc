@@ -8,7 +8,7 @@
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="clan_tag">Clan Tag</label>
-				<input type="text" name="clan_tag" class="form-control" placeholder="Clan Tag" id="clan-tag-search">
+				<input type="text" name="clan_tag" class="form-control" placeholder="Clan Tag" id="clan-tag-search" autofocus="true">
 			</div>
 			<button type="submit" class="btn btn-primary">Search</button>
 		</form>

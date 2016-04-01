@@ -8,6 +8,7 @@ use App\Clan;
 class ClashApi extends Model
 {
 	private $curl;
+	public $lastResponse;
 
 	public function __construct()
 	{
@@ -16,14 +17,16 @@ class ClashApi extends Model
 
 	public function getClanByTag($tag)
 	{
-		$request = $this->curl->newJsonRequest('GET', 'https://api.clashofclans.com/v1/clans/%23YVUV92R', array())
+		$request = $this->curl->newJsonRequest('GET', 'https://api.clashofclans.com/v1/clans/' . urlencode($tag), array())
 									->setHeader('authorization', 'Bearer ' . env('API_KEY'));
 		$response = $request->send();
+		// decoded response
 		$dcd = json_decode($response, true);
+		$this->lastResponse = $dcd;
 
 		$clan = new Clan;
 
-		$clan->tag = $dcd['tag'];
+		$clan->tag = str_replace('#', '', $dcd['tag']);
 		$clan->name = $dcd['name'];
 		$clan->type = $dcd['type'];
 		$clan->description = $dcd['description'];
