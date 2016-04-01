@@ -21,6 +21,10 @@ class ClanController extends Controller
 
     public function getSearchClanResults(Request $http)
     {
-    	return strtoupper($http->clan_tag);
+    	$tag = '#' . trim(strtoupper(str_replace('#', '', $http->clan_tag)));
+    	$ch = new ClashApi;
+    	$clan = $ch->getClanByTag($tag);
+
+    	return;
     }
 }
