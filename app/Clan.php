@@ -6,5 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clan extends Model
 {
-    protected $table = 'clans';
+	protected $table = 'clans';
+
+	public function updateAllInformation()
+	{
+		$affectedRows = Clan::where('tag', $this->tag)
+								->update([
+									'name' => $this->name,
+									'type' => $this->type,
+									'description' => $this->description,
+									'location_id' => $this->location_id,
+									'badge_small' => $this->badge_small,
+									'badge_medium' => $this->badge_medium,
+									'badge_large' => $this->badge_large,
+									'warFrequency' => $this->warFrequency,
+									'clanLevel' => $this->clanLevel,
+									'warWins' => $this->warWins,
+									'warWinStreak' => $this->warWinStreak,
+									'clanPoints' => $this->clanPoints,
+									'requiredTrophies' => $this->requiredTrophies,
+									'members' => $this->members
+								]);
+		return $affectedRows > 0 ? true : false;
+	}
+
+	public function members()
+	{
+		return $this->hasMany('App\Member', 'clanTag', 'tag');
+	}
 }

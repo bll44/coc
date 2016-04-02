@@ -11,12 +11,12 @@
 					@if($dualColumn)
 					<div class="col-lg-6">
 						@for($i = 0; $i < 25; $i++)
-						<p>{{ $i + 1 }}) <b>{{ $clanMemberList[$i]['name'] }}</b></p>
+						<p class="clan-member" data-member-tag="{{ $clanMemberList[$i]['tag'] }}">{{ $i + 1 }}) <b>{{ $clanMemberList[$i]['name'] }}</b></p>
 						@endfor
 					</div>
 					<div class="col-lg-6">
 						@for($i = 25; $i < count($clanMemberList); $i++)
-						<p>{{ $i + 1 }}) <b>{{ $clanMemberList[$i]['name'] }}</b></p>
+						<p class="clan-member" data-member-tag="{{ $clanMemberList[$i]['tag'] }}">{{ $i + 1 }}) <b>{{ $clanMemberList[$i]['name'] }}</b></p>
 						@endfor
 					</div>
 					@else

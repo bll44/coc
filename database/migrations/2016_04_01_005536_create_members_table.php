@@ -24,6 +24,7 @@ class CreateMembersTable extends Migration
             $table->integer('previousClanRank')->default(0);
             $table->integer('donations');
             $table->integer('donationsReceived');
+            $table->string('clanTag');
             $table->timestamps();
         });
     }

@@ -56,23 +56,7 @@ class ClanController extends Controller
 		}
 		elseif(count($result) > 0)
 		{
-			Clan::where('tag', $clan->tag)
-					->update([
-						'name' => $clan->name,
-						'type' => $clan->type,
-						'description' => $clan->description,
-						'location_id' => $clan->location_id,
-						'badge_small' => $clan->badge_small,
-						'badge_medium' => $clan->badge_medium,
-						'badge_large' => $clan->badge_large,
-						'warFrequency' => $clan->warFrequency,
-						'clanLevel' => $clan->clanLevel,
-						'warWins' => $clan->warWins,
-						'warWinStreak' => $clan->warWinStreak,
-						'clanPoints' => $clan->clanPoints,
-						'requiredTrophies' => $clan->requiredTrophies,
-						'members' => $clan->members
-					]);
+			$clan->updateAllInformation();
 		}
 
 		return redirect('/clans');
