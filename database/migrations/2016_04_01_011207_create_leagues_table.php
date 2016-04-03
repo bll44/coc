@@ -18,6 +18,7 @@ class CreateLeaguesTable extends Migration
             $table->string('name');
             $table->string('icon_small');
             $table->string('icon_tiny');
+            $table->string('icon_medium')->nullable();
             $table->timestamps();
         });
     }

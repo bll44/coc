@@ -19,3 +19,11 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/admin/refresh_clans', 'AdminController@refreshClans');
 Route::get('/admin/refresh_leagues', 'AdminController@refreshLeagues');
 Route::get('/admin/refresh_locations', 'AdminController@refreshLocations');
+
+use App\ClashApi;
+use App\Clan;
+use App\Location;
+Route::get('leaguetest', function() {
+	$clan = Clan::where('tag', '#YVUV92R')->first();
+	return $clan->location;
+});

@@ -9,7 +9,7 @@ class Clan extends Model
 {
 	protected $table = 'clans';
 
-	public function updateAllInformation()
+	public function updateInformation()
 	{
 		$affectedRows = Clan::where('tag', $this->tag)
 								->update([
@@ -40,5 +40,10 @@ class Clan extends Model
 	{
 		$result = DB::select('select * from members where clanTag = ? order by donations desc', [$this->tag]);
 		return $result[0];
+	}
+
+	public function location()
+	{
+		return $this->belongsTo('App\Location', 'location_id', 'location_id');
 	}
 }

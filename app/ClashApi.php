@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 use App\Clan;
 use App\Member;
+use App\League;
+use App\Location;
 
 class ClashApi extends Model
 {
@@ -52,6 +55,7 @@ class ClashApi extends Model
 									->setHeader('authorization', 'Bearer ' . env('API_KEY'));
 		$response = $request->send();
 		$decodedResponse = json_decode($response, true);
+		$this->lastResponse = $decodedResponse;
 
 		$members = array();
 
@@ -72,5 +76,56 @@ class ClashApi extends Model
 		}
 
 		return $members;
+	}
+
+	public function getLeagues()
+	{
+		$request = $this->curl->newJsonRequest('GET', 'https://api.clashofclans.com/v1/leagues', array())
+									->setHeader('authorization', 'Bearer ' . env('API_KEY'));
+		$response = $request->send();
+		$decodedResponse = json_decode($response, true);
+		$this->lastResponse = $decodedResponse;
+		$leagues = array();
+		foreach($decodedResponse['items'] as $item)
+		{
+			$league = new League;
+			$league->league_id = $item['id'];
+			$league->name = $item['name'];
+			$league->icon_small = $item['iconUrls']['small'];
+			$league->icon_tiny = $item['iconUrls']['tiny'];
+			if(isset($item['iconUrls']['medium']))
+				$league->icon_medium = $item['iconUrls']['medium'];
+			else
+				$league->icon_medium = null;
+
+			$leagues[] = $league;
+		}
+
+		return $leagues;
+	}
+
+	public function getLocations()
+	{
+		$request = $this->curl->newJsonRequest('GET', 'https://api.clashofclans.com/v1/locations', array())
+									->setHeader('authorization', 'Bearer ' . env('API_KEY'));
+		$response = $request->send();
+		$decodedResponse = json_decode($response, true);
+		$this->lastResponse = $decodedResponse;
+		$locations = array();
+		foreach($decodedResponse['items'] as $item)
+		{
+			$location = new Location;
+			$location->location_id = $item['id'];
+			$location->name = $item['name'];
+			$location->isCountry = $item['isCountry'];
+			if($location->isCountry)
+				$location->countryCode = $item['countryCode'];
+			else
+				$location->countryCode = null;
+
+			$locations[] = $location;
+		}
+
+		return $locations;
 	}
 }

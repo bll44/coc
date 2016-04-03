@@ -56,7 +56,7 @@ class ClanController extends Controller
 		if(count($result) < 1)
 			$clan->save();
 		else
-			$clan->updateAllInformation();
+			$clan->updateInformation();
 
 		return view('clans/save_members', ['clanMembers' => session()->get('clanMembers'), 'clan' => $clan]);
 	}
@@ -89,7 +89,7 @@ class ClanController extends Controller
 			if(count($result) < 1)
 				$member->save();
 			else
-				$member->updateAllInformation();
+				$member->updateInformation();
 		}
 		// flush session
 		session()->flush();

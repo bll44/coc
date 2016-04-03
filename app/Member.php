@@ -13,7 +13,7 @@ class Member extends Model
 		return $this->belongsTo('App\Clan', 'clanTag', 'tag');
 	}
 
-	public function updateAllInformation()
+	public function updateInformation()
 	{
 		$affectedRows = Member::where('tag', $this->tag)
 								->update([
