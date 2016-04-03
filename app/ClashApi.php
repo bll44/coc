@@ -27,7 +27,7 @@ class ClashApi extends Model
 
 		$clan = new Clan;
 
-		$clan->tag = str_replace('#', '', $decodedResponse['tag']);
+		$clan->tag = $decodedResponse['tag'];
 		$clan->name = $decodedResponse['name'];
 		$clan->type = $decodedResponse['type'];
 		$clan->description = $decodedResponse['description'];
@@ -41,7 +41,7 @@ class ClashApi extends Model
 		$clan->warWinStreak = $decodedResponse['warWinStreak'];
 		$clan->clanPoints = $decodedResponse['clanPoints'];
 		$clan->requiredTrophies = $decodedResponse['requiredTrophies'];
-		$clan->members = $decodedResponse['members'];
+		$clan->memberCount = $decodedResponse['members'];
 
 		return $clan;
 	}

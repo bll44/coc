@@ -12,7 +12,7 @@
 	<div class="col-lg-6">
 		<div id="clan-details-container" class="well no-display">
 			<img src="{{ $clan->badge_small }}" />
-			<p>Tag: #{{ $clan->tag }}</p>
+			<p>Tag: {{ $clan->tag }}</p>
 			<p>Type: {{ $clan->type }}</p>
 			<p>Description: {{ $clan->description }}</p>
 			<p>War frequency: {{ $clan->warFrequency }}</p>
@@ -21,7 +21,7 @@
 			<p>Win streak: {{ $clan->warWinStreak }}</p>
 			<p>Clan points: {{ $clan->clanPoints }}</p>
 			<p>Trophies required for entry: {{ $clan->requiredTrophies }}</p>
-			<p>Number of members: {{ $clan->members }}</p>
+			<p>Number of members: {{ $clan->memberCount }}</p>
 			<p><button type="button" class="btn btn-link" data-toggle="modal" data-target="#clanMembersModal">View Members</button></p>
 		</div>
 	</div>

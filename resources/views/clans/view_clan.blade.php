@@ -20,7 +20,7 @@
 			<p>Win streak: {{ $clan->warWinStreak }}</p>
 			<p>Clan points: {{ $clan->clanPoints }}</p>
 			<p>Trophies required for entry: {{ $clan->requiredTrophies }}</p>
-			<p>Number of members: {{ $clan->members }}</p>
+			<p>Number of members: {{ $clan->memberCount }}</p>
 		</div>
 	</div><!-- /.column -->
 	<div class="col-lg-6">

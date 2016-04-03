@@ -17,3 +17,13 @@ a.no-decoration:link {
 #toggle-clan-details-btn {
 	margin-bottom: 10px;
 }
+#clan-member-accordion .panel-body p span {
+	font-weight: bold;
+}
+#save-member-list .panel-group {
+	margin-top: 10px;
+}
+#save-member-list h3:nth-child(2) {
+	padding: 0;
+	margin: 15px 0;
+}

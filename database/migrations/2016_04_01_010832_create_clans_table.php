@@ -28,7 +28,7 @@ class CreateClansTable extends Migration
             $table->integer('warWinStreak')->default(0);
             $table->integer('clanPoints')->default(0);
             $table->integer('requiredTrophies')->default(0);
-            $table->integer('members');
+            $table->integer('memberCount');
             $table->timestamps();
         });
     }

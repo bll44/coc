@@ -8,7 +8,7 @@
 	</div><!-- /.column -->
 	<div class="col-lg-6">
 		@foreach($clans as $clan)
-		<p><a href="/clans/view/{{ $clan->tag }}">{{ $clan->name }}</a></p>
+		<p><a href="/clans/view/{{ urlencode($clan->tag) }}">{{ $clan->name }}</a></p>
 		@endforeach
 	</div>
 </div>
