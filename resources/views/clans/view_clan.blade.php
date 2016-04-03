@@ -6,6 +6,9 @@
 	<div class="col-lg-4">
 		<h1>{{ $clan->name }}</h1>
 	</div>
+	<div class="col-lg-8">
+		<h3 class="pull-right">Current Top Donator: <span class="text-danger">{{ $clan->getTopDonator()->name }} ({{ $clan->getTopDonator()->donations }})</span></h3>
+	</div>
 </div><!-- /.row -->
 <div class="row">
 	<div class="col-lg-6">
@@ -25,7 +28,36 @@
 	</div><!-- /.column -->
 	<div class="col-lg-6">
 		<div id="clan-members-container">
-			<h3>Clan members placeholder</h3>
+			<div class="panel-group" id="clan-member-accordion" role="tablist" aria-multiselectable="true">
+				@foreach($members as $member)
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading{{ str_replace('#', '', $member->tag) }}">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ str_replace('#', '', $member->tag) }}" aria-expanded="true" aria-controls="collapse{{ str_replace('#', '', $member->tag) }}">
+								{{ $member->name }} <span class="text-info">[{{ $member->role }}]</span>
+							</a>
+						</h4>
+					</div>
+					<div id="collapse{{ str_replace('#', '', $member->tag) }}" class="panel-collapse collapse" role="tabpanel" 
+												aria-labelledby="heading{{ str_replace('#', '', $member->tag) }}">
+						<div class="panel-body">
+							<p>Tag: <span>{{ $member->tag }}</span></p>
+							<p>Name: <span>{{ $member->name }}</span></p>
+							<p>Role: <span>{{ $member->role }}</span></p>
+							<p>Experience Level: <span>{{ $member->expLevel }}</span></p>
+							<p>League: <span>{{ $member->league_id }}</span></p>
+							<p>Trophy Count: <span>{{ $member->trophies }}</span></p>
+							<p>Current Clan Rank: <span>{{ $member->clanRank }}</span></p>
+							<p>Current donations: <span>{{ $member->donations }}</span></p>
+							<p>Current donations received: <span>{{ $member->donationsReceived }}</span></p>
+						</div><!-- /.panel-body -->
+					</div><!-- /.panel-collapse -->
+				</div><!-- /.panel -->
+				@endforeach
+			</div><!-- /.panel-group -->
+			<div class="pull-right">
+				{{ $members->links() }}
+			</div>
 		</div><!-- /#clan-members-container -->
 	</div><!-- /.column -->
 </div><!-- /.row -->

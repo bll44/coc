@@ -26,7 +26,8 @@ class ClanController extends Controller
 	public function viewClan($tag)
 	{
 		$clan = Clan::where('tag', urldecode($tag))->first();
-		return view('/clans/view_clan', compact('clan'));
+		$members = Member::where('clanTag', $clan->tag)->paginate(10);
+		return view('/clans/view_clan', compact('clan', 'members'));
 	}
 
 	public function getSearchClanResults(Request $http)

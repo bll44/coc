@@ -15,6 +15,8 @@
 			<ul class="nav navbar-nav">
 				<li id="nav-link-home"><a href="/">Home</a></li>
 				<li id="nav-link-clans"><a href="/clans">Clans</a></li>
+				<li id="nav-link-members"><a href="/members">Members</a></li>
+				<li id="nav-link-admin"><a href="/admin">Site Admin</a></li>
 			</ul><!-- /.nav navbar-nav -->
 		</div><!-- /#navbar-collapse-1 -->
 	</div><!-- /.container -->

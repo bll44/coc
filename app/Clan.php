@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \DB;
 
 class Clan extends Model
 {
@@ -33,5 +34,11 @@ class Clan extends Model
 	public function members()
 	{
 		return $this->hasMany('App\Member', 'clanTag', 'tag');
+	}
+
+	public function getTopDonator()
+	{
+		$result = DB::select('select * from members where clanTag = ? order by donations desc', [$this->tag]);
+		return $result[0];
 	}
 }

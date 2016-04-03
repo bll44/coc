@@ -68,6 +68,9 @@ class ClashApi extends Model
 			$member->previousClanRank = $item['previousClanRank'];
 			$member->donations = $item['donations'];
 			$member->donationsReceived = $item['donationsReceived'];
+			$members[] = $member;
 		}
+
+		return $members;
 	}
 }
