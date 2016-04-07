@@ -20,10 +20,9 @@ Route::get('/admin/refresh_clans', 'AdminController@refreshClans');
 Route::get('/admin/refresh_leagues', 'AdminController@refreshLeagues');
 Route::get('/admin/refresh_locations', 'AdminController@refreshLocations');
 
-use App\ClashApi;
-use App\Clan;
-use App\Location;
-Route::get('leaguetest', function() {
-	$clan = Clan::where('tag', '#YVUV92R')->first();
-	return $clan->location;
+Route::get('insert', function() {
+	DB::insert("insert into clans values (5, '#YVUV92X', 'the clan', 'test', 'a description',
+							'2900', 'badge small', 'badge medium', 'badge large',
+                            'always', 10, 50, 10, 1000, 2000, 30, NOW(), NOW())");
+	return 'inserted';
 });
