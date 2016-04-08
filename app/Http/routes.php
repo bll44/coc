@@ -16,14 +16,11 @@ Route::get('/members/list/{tag}', 'MemberController@viewMembersByClan');
 
 // Admin routes
 Route::get('/admin', 'AdminController@index');
+Route::get('/admin/index', 'AdminController@index');
 Route::get('/admin/refresh_clans', 'AdminController@refreshClans');
 Route::get('/admin/refresh_leagues', 'AdminController@refreshLeagues');
 Route::get('/admin/refresh_locations', 'AdminController@refreshLocations');
 Route::get('/admin/login', 'AdminController@getAdminLogin');
-
-Route::get('insert', function() {
-	DB::insert("insert into clans values (5, '#YVUV92X', 'the clan', 'test', 'a description',
-							'2900', 'badge small', 'badge medium', 'badge large',
-                            'always', 10, 50, 10, 1000, 2000, 30, NOW(), NOW())");
-	return 'inserted';
-});
+Route::post('/admin/login', 'AdminController@postAdminLogin');
+Route::get('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@getCreateAdminAccount']);
+Route::post('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@postCreateAdminAccount']);

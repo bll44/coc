@@ -10,6 +10,7 @@ use App\ClashApi;
 use App\Clan;
 use App\League;
 use App\Location;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -21,6 +22,25 @@ class AdminController extends Controller
 	public function getAdminLogin()
 	{
 		return view('admin/admin_login', ['activeNavLink' => 'login']);
+	}
+
+	public function postAdminLogin(Request $http)
+	{
+		if(Auth::attempt(['username' => $http->username, 'password' => $http->password]))
+			return redirect()->intended('/admin/index');
+		else
+			return redirect('/admin/login')->withInput();
+	}
+
+	public function getCreateAdminAccount()
+	{
+		return view('admin.create_admin_account');
+	}
+
+	public function postCreateAdminAccount(Request $http)
+	{
+		
+		return redirect('/admin', ['http' => $http]);
 	}
 
 	public function refreshClans()

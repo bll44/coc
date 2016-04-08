@@ -13,20 +13,25 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li id="nav-link-dashboard"><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Dashboard</a></li>
-			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Widgets</a></li>
+			<li id="nav-link-dashboard"><a href="/admin"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Dashboard</a></li>
+
+			<!--
+ 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Widgets</a></li>
 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Charts</a></li>
 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Tables</a></li>
 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Forms</a></li>
 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Alerts &amp; Panels</a></li>
 			<li><a href="#"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Icons</a></li>
+			 -->
+
 			<li role="presentation" class="divider"></li>
 			<li class="nav-link-login"><a href="/admin/login"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Login Page</a></li>
+			<li class="nav-link-login"><a href="/admin/create_account"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Create Admin Account</a></li>
 		</ul>
 
 	</div><!--/.sidebar-->
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="col-lg-offset-2 col-lg-10 main">
 
 		@yield('content')
 
