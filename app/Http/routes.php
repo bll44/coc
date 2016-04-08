@@ -9,6 +9,7 @@ Route::get('/clans/searchClanResults', 'ClanController@getSearchClanResults');
 Route::get('/clans/save', 'ClanController@getSaveClan');
 Route::get('/clans/view/{tag}', 'ClanController@viewClan');
 Route::get('/clans/members/save', 'ClanController@getSaveClanMembers');
+Route::get('/clans/donation_data', 'ClanController@getDonationData');
 
 // Member routes
 Route::get('/members', 'MemberController@index');

@@ -27,7 +27,31 @@ class ClanController extends Controller
 	{
 		$clan = Clan::where('tag', urldecode($tag))->first();
 		$members = Member::where('clanTag', $clan->tag)->paginate(10);
-		return view('/clans/view_clan', compact('clan', 'members'));
+		$donationData = array();
+		$donationData['totalDonations' => 0];
+		$donationData['totalDonationsReceived' => 0];
+		foreach($members as $m)
+		{
+			$donationData['totalDonations'] += $m->donations;
+			$donationData['totalDonationsReceived'] += $m->donationsReceived;
+		}
+		return view('/clans/view_clan', [
+						'clan' => $clan,
+						'members' => $members,
+						'donationData' => $donationData,
+					]);
+	}
+
+	public function getDonationData(Request $http)
+	{
+		$donationsMemberList = Member::where('clanTag', urldecode($http->clanTag))->orderBy('donations', 'desc')->take(20)->get();
+		$donationData = array();
+		foreach($donationsMemberList as $m)
+		{
+			$memberData = [$m->name, $m->donations, $m->donationsReceived];
+			$donationData[] = $memberData;
+		}
+		return json_encode(array_reverse($donationData));
 	}
 
 	public function getSearchClanResults(Request $http)

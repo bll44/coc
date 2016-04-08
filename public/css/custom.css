@@ -27,3 +27,12 @@ a.no-decoration:link {
 	padding: 0;
 	margin: 15px 0;
 }
+.admin-action-text {
+	font-size: 18px;
+}
+.admin-action-text span.label {
+	margin-right: 15px;
+}
+.status-animation {
+	margin: 0 0 0 5px;
+}

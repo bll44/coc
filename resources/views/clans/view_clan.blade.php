@@ -7,7 +7,7 @@
 		<h1>{{ $clan->name }}</h1>
 	</div>
 	<div class="col-lg-8">
-		<h3 class="pull-right">Current Top Donator: <span class="text-danger">{{ $clan->getTopDonator()->name }} ({{ $clan->getTopDonator()->donations }})</span></h3>
+		<h3 class="pull-right">Current Top Donor: <span class="text-danger">{{ $clan->getTopDonator()->name }} ({{ $clan->getTopDonator()->donations }})</span></h3>
 	</div>
 </div><!-- /.row -->
 <div class="row">
@@ -39,7 +39,7 @@
 						</h4>
 					</div>
 					<div id="collapse{{ str_replace('#', '', $member->tag) }}" class="panel-collapse collapse" role="tabpanel" 
-												aria-labelledby="heading{{ str_replace('#', '', $member->tag) }}">
+						aria-labelledby="heading{{ str_replace('#', '', $member->tag) }}">
 						<div class="panel-body">
 							<p>Tag: <span>{{ $member->tag }}</span></p>
 							<p>Name: <span>{{ $member->name }}</span></p>
@@ -47,9 +47,9 @@
 							<p>Experience Level: <span>{{ $member->expLevel }}</span></p>
 							<p>League: <span>{{ $member->league_id }}</span></p>
 							<p>Trophy Count: <span>{{ $member->trophies }}</span></p>
-							<p>Current Clan Rank: <span>{{ $member->clanRank }}</span></p>
-							<p>Current donations: <span>{{ $member->donations }}</span></p>
-							<p>Current donations received: <span>{{ $member->donationsReceived }}</span></p>
+							<p>Clan Rank: <span>{{ $member->clanRank }}</span></p>
+							<p>Donations (per season): <span>{{ $member->donations }}</span></p>
+							<p>Donations received (per season): <span>{{ $member->donationsReceived }}</span></p>
 						</div><!-- /.panel-body -->
 					</div><!-- /.panel-collapse -->
 				</div><!-- /.panel -->
@@ -61,5 +61,43 @@
 		</div><!-- /#clan-members-container -->
 	</div><!-- /.column -->
 </div><!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div id="donations-chart-container"></div><!-- /#donations-graph -->
+	</div><!-- /.column -->
+</div><!-- /.row -->
+
+@stop
+
+@section('scripts')
+<script>
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+	var donationData = [
+		['Clan Members', '# of Donations', '# of Donations Received'],
+	];
+	
+	$.ajax({
+		url: '/clans/donation_data/?clanTag={{ urlencode($clan->tag) }}',
+		type: 'GET',
+		dataType: 'json'
+	}).done(function(data) {
+		for(var x in data) {
+			donationData.push(data[x]);
+		}
+		var data = google.visualization.arrayToDataTable(donationData);
+		var options = {
+			title: 'Donation Performance',
+			height: 500,
+		};
+
+		var chart = new google.visualization.ColumnChart(document.getElementById('donations-chart-container'));
+		chart.draw(data, options);
+	});
+}
+
+</script>
 
 @stop

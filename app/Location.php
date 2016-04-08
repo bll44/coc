@@ -12,4 +12,15 @@ class Location extends Model
     {
     	return $this->hasMany('App\Clan', 'location_id', 'location_id');
     }
+
+    public function updateInformation()
+    {
+    	$affectedRows = Location::where('location_id', $this->location_id)
+									->update([
+										'name' => $this->name,
+										'isCountry' => $this->isCountry,
+										'countryCode' => $this->countryCode
+									]);
+		return $affectedRows > 0 ? true : false;
+    }
 }
