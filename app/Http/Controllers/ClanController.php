@@ -28,8 +28,8 @@ class ClanController extends Controller
 		$clan = Clan::where('tag', urldecode($tag))->first();
 		$members = Member::where('clanTag', $clan->tag)->paginate(10);
 		$donationData = array();
-		$donationData['totalDonations' => 0];
-		$donationData['totalDonationsReceived' => 0];
+		$donationData['totalDonations'] = 0;
+		$donationData['totalDonationsReceived'] = 0;
 		foreach($members as $m)
 		{
 			$donationData['totalDonations'] += $m->donations;
