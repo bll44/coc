@@ -15,7 +15,12 @@ class AdminController extends Controller
 {
 	public function index()
 	{
-		return view('admin/index');
+		return view('admin/index', ['activeNavLink' => 'dashboard']);
+	}
+
+	public function getAdminLogin()
+	{
+		return view('admin/admin_login', ['activeNavLink' => 'login']);
 	}
 
 	public function refreshClans()

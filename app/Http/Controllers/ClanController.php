@@ -18,11 +18,6 @@ class ClanController extends Controller
 		return view('clans/index', ['activeNavLink' => 'clans', 'clans' => $clans]);
 	}
 
-	public function getSearchClans()
-	{
-		return view('clans/search_clans', ['activeNavLink' => 'clans']);
-	}
-
 	public function viewClan($tag)
 	{
 		$clan = Clan::where('tag', urldecode($tag))->first();
@@ -39,6 +34,7 @@ class ClanController extends Controller
 						'clan' => $clan,
 						'members' => $members,
 						'donationData' => $donationData,
+						'activeNavLink' => 'clans'
 					]);
 	}
 
@@ -71,7 +67,7 @@ class ClanController extends Controller
 	public function getSaveClan(Request $http)
 	{
 		if($http->option === 'no')
-			return redirect('/clans/search');
+			return redirect('/clans');
 
 		$clan = session()->get('clan');
 

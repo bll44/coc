@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-@include('layouts/partials/header')
+@include('layouts.partials.header')
 
 <body>
 
 	<div class="container">
 		<div class="row">
-			@include('layouts/navs/default-nav')
+			@include('layouts.navs.default-nav')
 		</div>
 		
 		@yield('content')
@@ -16,7 +16,7 @@
 
 @yield('scripts')
 
-@include('layouts/partials/footer');
+@include('layouts.partials.footer');
 
 </body>
 </html>

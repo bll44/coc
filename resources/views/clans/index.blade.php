@@ -1,10 +1,10 @@
-@extends('layouts/master')
+@extends('layouts.master')
 
 @section('content')
 
 <div class="row">
 	<div class="col-lg-6">
-		<p><a href="/clans/search">Search Clans</a></p>
+		<p>Search Clans</p>
 	</div><!-- /.column -->
 	<div class="col-lg-6">
 		@foreach($clans as $clan)
