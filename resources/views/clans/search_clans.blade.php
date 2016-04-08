@@ -23,9 +23,9 @@
 
 $('#clan-tag-search').on('keyup keydown', function() {
 	if($(this).val().length > 0)
-		$(this).addClass('transformUp');
+		$(this).addClass('transform-up');
 	else
-		$(this).removeClass('transformUp');
+		$(this).removeClass('transform-up');
 });
 
 </script>

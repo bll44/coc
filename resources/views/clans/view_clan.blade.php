@@ -48,8 +48,8 @@
 							<p>League: <span>{{ $member->league_id }}</span></p>
 							<p>Trophy Count: <span>{{ $member->trophies }}</span></p>
 							<p>Clan Rank: <span>{{ $member->clanRank }}</span></p>
-							<p>Donations (per season): <span>{{ $member->donations }}</span></p>
-							<p>Donations received (per season): <span>{{ $member->donationsReceived }}</span></p>
+							<p>Donations: <span>{{ $member->donations }}</span></p>
+							<p>Donations received: <span>{{ $member->donationsReceived }}</span></p>
 						</div><!-- /.panel-body -->
 					</div><!-- /.panel-collapse -->
 				</div><!-- /.panel -->
@@ -90,7 +90,7 @@ function drawChart() {
 		var data = google.visualization.arrayToDataTable(donationData);
 		var options = {
 			title: 'Donation Performance',
-			height: 500,
+			height: 500
 		};
 
 		var chart = new google.visualization.ColumnChart(document.getElementById('donations-chart-container'));

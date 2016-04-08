@@ -33,7 +33,7 @@ class AdminController extends Controller
 				$m->updateInformation();
 			}
 		}
-		return response()->json(['message' => 'Clan and members successfully updated.']);
+		return response()->json(['message' => 'Clans and members successfully updated.']);
 	}
 
 	public function refreshLeagues()

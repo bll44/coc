@@ -26,7 +26,7 @@ class ClanController extends Controller
 	public function viewClan($tag)
 	{
 		$clan = Clan::where('tag', urldecode($tag))->first();
-		$members = Member::where('clanTag', $clan->tag)->paginate(10);
+		$members = Member::where('clanTag', $clan->tag)->orderBy('clanRank', 'asc')->paginate(10);
 		$donationData = array();
 		$donationData['totalDonations'] = 0;
 		$donationData['totalDonationsReceived'] = 0;

@@ -2,7 +2,7 @@ body {
 	padding-top: 30px;
 	font-family: 'Cabin', sans-serif;
 }
-.transformUp {
+.transform-up {
 	text-transform: uppercase;
 }
 a.no-decoration:hover,

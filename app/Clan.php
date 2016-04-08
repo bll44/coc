@@ -26,7 +26,7 @@ class Clan extends Model
 									'warWinStreak' => $this->warWinStreak,
 									'clanPoints' => $this->clanPoints,
 									'requiredTrophies' => $this->requiredTrophies,
-									'memberCount' => $this->members
+									'memberCount' => $this->memberCount
 								]);
 		return $affectedRows > 0 ? true : false;
 	}
