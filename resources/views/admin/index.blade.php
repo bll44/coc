@@ -2,6 +2,17 @@
 
 @section('content')
 
+@if(session('authMessage'))
+<div class="row">
+	<div class="col-lg-6 auth-alert-container">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			{{ session('authMessage') }}
+		</div>
+	</div>
+</div><!-- /.row -->
+@endif
+
 <div class="row">
 	<div class="col-lg-12">
 		<p class="admin-action-text" id="clan-members-action">
@@ -17,7 +28,7 @@
 			<a href="/admin/refresh_locations" class="data-refresh-link" id="refresh-locations-link">Refresh Locations</a>
 		</p>
 	</div>
-</div>
+</div><!-- /.row -->
 
 @stop
 

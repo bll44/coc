@@ -1,3 +1,6 @@
-#admin-login-form {
+#admin-login-form, #create-admin-account-form {
 	margin-top: 75px;
+}
+.auth-alert-container {
+	margin-top: 55px;
 }

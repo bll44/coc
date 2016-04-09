@@ -11,9 +11,18 @@ use App\Clan;
 use App\League;
 use App\Location;
 use Auth;
+use App\User;
+use Validator;
+use Hash;
 
 class AdminController extends Controller
 {
+
+	public function test()
+	{
+		return Auth::check() ? 'true' : 'false';
+	}
+
 	public function index()
 	{
 		return view('admin/index', ['activeNavLink' => 'dashboard']);
@@ -21,6 +30,8 @@ class AdminController extends Controller
 
 	public function getAdminLogin()
 	{
+		if(Auth::check())
+			return redirect('/admin/index')->with('authMessage', 'Already logged in.');
 		return view('admin/admin_login', ['activeNavLink' => 'login']);
 	}
 
@@ -29,18 +40,43 @@ class AdminController extends Controller
 		if(Auth::attempt(['username' => $http->username, 'password' => $http->password]))
 			return redirect()->intended('/admin/index');
 		else
-			return redirect('/admin/login')->withInput();
+			return redirect('/admin/login')
+						->with('authMessage', 'Login failed. Please try again.')
+						->withInput();
 	}
 
-	public function getCreateAdminAccount()
+	public function getCreateAdminAccount(Request $http)
 	{
-		return view('admin.create_admin_account');
+		return view('admin.create_admin_account', ['activeNavLink' => 'create']);
 	}
 
-	public function postCreateAdminAccount(Request $http)
+	public function postCreateAdminAccount(Request $http, User $user)
 	{
-		
-		return redirect('/admin', ['http' => $http]);
+		$validator = Validator::make($http->all(), [
+				'username' => 'required|unique:users|min:6',
+				'password' => 'required|confirmed|min:6',
+				'display_name' => 'required',
+		]);
+
+		if($validator->fails())
+			return redirect('/admin/create_admin_account')
+						->withErrors($validator)
+						->withInput();
+
+		$user->display_name = $http->display_name;
+		$user->username = $http->username;
+		$user->password = Hash::make($http->password);
+		$user->admin = $http->admin ? 1 : 0;
+		$user->save();
+
+		return redirect('/admin');
+	}
+
+	public function logout()
+	{
+		Auth::logout();
+		session()->flush();
+		return redirect('/admin/index');
 	}
 
 	public function refreshClans()
@@ -89,5 +125,11 @@ class AdminController extends Controller
 				$l->save();
 		}
 		return response()->json(['message' => 'Locations successfully updated.']);
+	}
+
+	public function getViewUserProfile($username)
+	{
+		$user = User::where('username', $username)->first();
+		return view('admin.user_profile', ['user' => $user, 'activeNavLink' => null]);
 	}
 }

@@ -22,5 +22,22 @@ Route::get('/admin/refresh_leagues', 'AdminController@refreshLeagues');
 Route::get('/admin/refresh_locations', 'AdminController@refreshLocations');
 Route::get('/admin/login', 'AdminController@getAdminLogin');
 Route::post('/admin/login', 'AdminController@postAdminLogin');
-Route::get('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@getCreateAdminAccount']);
-Route::post('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@postCreateAdminAccount']);
+Route::group(['middleware' => 'admin'], function() {
+	Route::get('/admin/create_admin_account', 'AdminController@getCreateAdminAccount');
+	Route::post('/admin/create_admin_account', 'AdminController@postCreateAdminAccount');
+	Route::get('/admin/logout', 'AdminController@logout');
+
+	// Profile
+	Route::get('/admin/profile/{username}', 'AdminController@getViewUserProfile');
+});
+// Route::get('/admin/logout', 'AdminController@logout');
+// Route::get('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@getCreateAdminAccount']);
+// Route::post('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@postCreateAdminAccount']);
+
+Route::get('test', 'AdminController@test');
+
+Route::get('logout', function() {
+	Auth::logout();
+	session()->flush();
+	return 'done';
+});
