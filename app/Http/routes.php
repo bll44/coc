@@ -1,10 +1,10 @@
 <?php
 
-Route::get('/', 'HomeController@index');
-
 // Clan routes
+Route::get('/', 'ClanController@index');
 Route::get('/clans', 'ClanController@index');
-Route::get('/clans/searchClanResults', 'ClanController@getSearchClanResults');
+Route::get('/clans/index', 'ClanController@index');
+Route::get('/clans/search', 'ClanController@getClanSearchResults');
 Route::get('/clans/save', 'ClanController@getSaveClan');
 Route::get('/clans/view/{tag}', 'ClanController@viewClan');
 Route::get('/clans/members/save', 'ClanController@getSaveClanMembers');
@@ -23,21 +23,10 @@ Route::get('/admin/refresh_locations', 'AdminController@refreshLocations');
 Route::get('/admin/login', 'AdminController@getAdminLogin');
 Route::post('/admin/login', 'AdminController@postAdminLogin');
 Route::group(['middleware' => 'admin'], function() {
+	Route::get('/admin/logout', 'AdminController@logout');
 	Route::get('/admin/create_admin_account', 'AdminController@getCreateAdminAccount');
 	Route::post('/admin/create_admin_account', 'AdminController@postCreateAdminAccount');
-	Route::get('/admin/logout', 'AdminController@logout');
 
 	// Profile
 	Route::get('/admin/profile/{username}', 'AdminController@getViewUserProfile');
-});
-// Route::get('/admin/logout', 'AdminController@logout');
-// Route::get('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@getCreateAdminAccount']);
-// Route::post('/admin/create_admin_account', ['middleware' => 'admin', 'AdminController@postCreateAdminAccount']);
-
-Route::get('test', 'AdminController@test');
-
-Route::get('logout', function() {
-	Auth::logout();
-	session()->flush();
-	return 'done';
 });

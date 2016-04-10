@@ -56,6 +56,7 @@ class AdminController extends Controller
 				'username' => 'required|unique:users|min:6',
 				'password' => 'required|confirmed|min:6',
 				'display_name' => 'required',
+				'email' => 'email',
 		]);
 
 		if($validator->fails())
@@ -67,6 +68,7 @@ class AdminController extends Controller
 		$user->username = $http->username;
 		$user->password = Hash::make($http->password);
 		$user->admin = $http->admin ? 1 : 0;
+		$user->email = $http->email;
 		$user->save();
 
 		return redirect('/admin');

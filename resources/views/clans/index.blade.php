@@ -14,7 +14,7 @@
 </div><!-- /.row -->
 <div class="row">
 	<div class="col-lg-4">
-		<form class="form-inline" action="/clans/searchClanResults">
+		<form class="form-inline" action="/clans/search">
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="clan_tag"></label>

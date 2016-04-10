@@ -5,18 +5,17 @@
 
 <body>
 
-	<div class="container">
-		<div class="row">
-			@include('layouts.navs.default-nav')
-		</div>
+	<div class="row">
+		<div class="col-lg-offset-3 col-lg-6">
+
+			@yield('content')
 		
-		@yield('content')
-	
-	</div><!-- /.container -->
+		</div><!-- /.col -->
+	</div><!-- /.row -->
 
-@yield('scripts')
+	@yield('scripts')
 
-@include('layouts.partials.footer');
+	@include('layouts.partials.footer');
 
 </body>
 </html>
