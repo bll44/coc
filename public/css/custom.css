@@ -2,6 +2,9 @@ body {
 	padding-top: 25px;
 	font-family: 'Cabin', sans-serif;
 }
+#navbar-container {
+	margin-bottom: 20px;
+}
 .transform-up {
 	text-transform: uppercase;
 }

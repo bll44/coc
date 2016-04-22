@@ -88,7 +88,6 @@ class AdminController extends Controller
 		foreach($clans as $clan)
 		{
 			$c = $cah->getClanByTag($clan->tag);
-			return $c;
 			$c->updateInformation();
 			$members = $cah->getClanMembersByTag($clan->tag);
 			foreach($members as $m)

@@ -4,12 +4,20 @@
 @include('layouts.partials.header')
 
 <body>
-	<div class="container">
-		@include('layouts.navs.default-nav')
-
+	<div class="row">
+		<div class="container" id="navbar-container">
+		
+			@include('layouts.navs.default-nav')
+		
+		</div><!-- /#navbar-container -->
+	</div><!-- /.row -->
+	<div class="row">
+		<div class="container" id="main-content-container">
+		
 			@yield('content')
 		
-	</div><!-- /.container -->
+		</div><!-- /#main-content-container -->
+	</div><!-- /.row -->
 
 	@yield('scripts')
 
