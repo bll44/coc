@@ -27,7 +27,7 @@ class ClashApi extends Model
 		// decoded response
 		$decodedResponse = json_decode($response, true);
 		$this->lastResponse = $decodedResponse;
-
+		return $decodedResponse;
 		$clan = new Clan;
 
 		$clan->tag = $decodedResponse['tag'];
