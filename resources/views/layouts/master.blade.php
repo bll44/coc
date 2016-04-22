@@ -4,14 +4,12 @@
 @include('layouts.partials.header')
 
 <body>
-
-	<div class="row">
-		<div class="col-lg-offset-3 col-lg-6">
+	<div class="container">
+		@include('layouts.navs.default-nav')
 
 			@yield('content')
 		
-		</div><!-- /.col -->
-	</div><!-- /.row -->
+	</div><!-- /.container -->
 
 	@yield('scripts')
 

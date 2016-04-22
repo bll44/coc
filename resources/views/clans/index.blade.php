@@ -2,28 +2,25 @@
 
 @section('content')
 
-<div class="row">
-	<div class="col-lg-6">
-		<p>Search Clans</p>
-	</div><!-- /.column -->
-	<div class="col-lg-6">
-		@foreach($clans as $clan)
-		<p><a href="/clans/view/{{ urlencode($clan->tag) }}">{{ $clan->name }}</a></p>
-		@endforeach
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Clans</h3>
 	</div>
-</div><!-- /.row -->
-<div class="row">
-	<div class="col-lg-4">
-		<form class="form-inline" action="/clans/search">
-			{{ csrf_field() }}
-			<div class="form-group">
-				<label for="clan_tag"></label>
-				<input type="text" name="clan_tag" class="form-control" id="clan-tag-search" placeholder="Clan tag">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-5">
+				<form action="/clans/search">
+					{{ csrf_field() }}
+					<div class="form-group">
+						<label for="clan_tag">Search by Clan Tag</label>
+						<input type="text" name="clan_tag" class="form-control" placeholder="Clan tag" id="clan-tag-search">
+					</div>
+					<button type="button" class="btn btn-primary" id="clan-search-btn">Search</button>
+				</form>
 			</div>
-			<button type="submit" class="btn btn-primary">Search clans</button>
-		</form>
-	</div>
-</div><!-- /.row -->
+		</div><!-- /.row -->
+	</div><!-- /.panel-body -->
+</div><!-- /.panel -->
 
 @stop
 
@@ -31,11 +28,27 @@
 
 <script>
 
-$('#clan-tag-search').on('keyup keydown', function() {
+$('#clan-tag-search').on('keydown keyup', function() {
 	if($(this).val().length > 0)
 		$(this).addClass('transform-up');
 	else
 		$(this).removeClass('transform-up');
+});
+
+$('#clan-search-btn').click(function() {
+	var form = $(this).parent();
+	var url = form.attr('action');
+	
+	
+	$.ajax({
+		url: url,
+		type: 'GET',
+		dataType: 'json',
+		data: formData,
+		success: function(data) {
+			console.log(data.clan.name);
+		}
+	});
 });
 
 </script>
