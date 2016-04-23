@@ -17,15 +17,15 @@
 	<div class="col-lg-12">
 		<p class="admin-action-text" id="clan-members-action">
 			<span class="label label-default">No status</span>
-			<a href="/admin/refresh_clans" class="data-refresh-link" id="refresh-clans-link">Refresh Stored Clans (+ Members)</a>
+			<a href="/admin/refresh_clans" class="data-refresh-link" id="refresh-clans-link">Refresh Stored Clans and Members</a>
 		</p>
 		<p class="admin-action-text" id="leagues-action">
 			<span class="label label-default">No status</span>
-			<a href="/admin/refresh_leagues" class="data-refresh-link" id="refresh-leagues-link">Refresh Leagues</a>
+			<a href="/admin/refresh_leagues" class="data-refresh-link" id="refresh-leagues-link">Refresh All Leagues</a>
 		</p>
 		<p class="admin-action-text" id="locations-action">
 			<span class="label label-default">No status</span>
-			<a href="/admin/refresh_locations" class="data-refresh-link" id="refresh-locations-link">Refresh Locations</a>
+			<a href="/admin/refresh_locations" class="data-refresh-link" id="refresh-locations-link">Refresh All Locations</a>
 		</p>
 	</div>
 </div><!-- /.row -->

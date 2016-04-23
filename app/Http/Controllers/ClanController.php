@@ -52,18 +52,27 @@ class ClanController extends Controller
 
 	public function getClanSearchResults(Request $http)
 	{
-		$tag = '#' . trim(strtoupper(str_replace('#', '', $http->clan_tag)));
 		$ch = new ClashApi;
-		$clan = $ch->getClanByTag($tag);
-		session()->put('clan', $clan);
-		session()->put('clanMembers', $ch->lastResponse['memberList']);
-		$dualColumn = count($ch->lastResponse['memberList']) > 25 ? true : false;
 
-		return json_encode(['clan' => $clan]);
+		if($http->type === 'tag')
+		{
+			$tag = '#' . trim(strtoupper(str_replace('#', '', $http->clan_tag)));
+			$clan = $ch->getClanByTag($tag);
+			return $clan;
+			session()->put('clan', $clan);
+			session()->put('clanMembers', $ch->lastResponse['memberList']);
+			$dualColumn = count($ch->lastResponse['memberList']) > 25 ? true : false;
+		}
+		elseif($http->type === 'name')
+		{
 
-		return view('clans/clan_search_results', array('clan' => $clan,
-														'clanMemberList' => $ch->lastResponse['memberList'],
-														'dualColumn' => $dualColumn));
+		}
+
+		// return json_encode(['clan' => $clan]);
+
+		// return view('clans/clan_search_results', array('clan' => $clan,
+		// 												'clanMemberList' => $ch->lastResponse['memberList'],
+		// 												'dualColumn' => $dualColumn));
 	}
 
 	public function getSaveClan(Request $http)

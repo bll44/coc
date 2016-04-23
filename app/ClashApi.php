@@ -24,18 +24,54 @@ class ClashApi extends Model
 		$request = $this->curl->newJsonRequest('GET', env('CLASH_BASE_API_URL').'/clans/' . urlencode($tag), array())
 									->setHeader('authorization', 'Bearer ' . env('CLASH_API_KEY'));
 		$response = $request->send();
+		// 2nd param 'true' converts returned json object into associative php array
+		$decodedResponse = json_decode($response, true);
+		$this->lastResponse = $decodedResponse;
+
 		$clan = $this->buildClanObject($response);
+
 		return $clan;
 	}
 
-
-	// **************** this method will need updated to handle multiple clans returned in the response *********************//
 	public function getClanByName($name)
 	{
 		$request = $this->curl->newJsonRequest('GET', env('CLASH_BASE_API_URL').'/clans?name=' . trim($name), array())
 									->setHeader('authorization', 'Bearer ' . env('CLASH_API_KEY'));
 		$response = $request->send();
-		$clan = $this->buildClanObject($response);
+		// 2nd param 'true' converts returned json object into associative php array
+		$decodedResponse = json_decode($response, true);
+		$this->lastResponse = $decodedResponse;
+
+		$clanResults = array();
+		foreach($decodedResponse as $item)
+		{
+			$clanResults[] = $this->buildClanObject($item);
+		}
+
+		return $clanResults;
+	}
+
+	private function buildClanObject($item)
+	{
+
+		$clan = new Clan;
+
+		$clan->tag = $item['tag'];
+		$clan->name = $item['name'];
+		$clan->type = $item['type'];
+		$clan->description = $item['description'];
+		$clan->location_id = $item['location']['id'];
+		$clan->badge_small = $item['badgeUrls']['small'];
+		$clan->badge_medium = $item['badgeUrls']['medium'];
+		$clan->badge_large = $item['badgeUrls']['large'];
+		$clan->warFrequency = $item['warFrequency'];
+		$clan->clanLevel = $item['clanLevel'];
+		$clan->warWins = $item['warWins'];
+		$clan->warWinStreak = $item['warWinStreak'];
+		$clan->clanPoints = $item['clanPoints'];
+		$clan->requiredTrophies = $item['requiredTrophies'];
+		$clan->memberCount = $item['members'];
+
 		return $clan;
 	}
 
@@ -117,32 +153,5 @@ class ClashApi extends Model
 		}
 
 		return $locations;
-	}
-
-	private function buildClanObject($response)
-	{
-		// 2nd param 'true' converts returned json object into associative php array
-		$decodedResponse = json_decode($response, true);
-		$this->lastResponse = $decodedResponse;
-
-		$clan = new Clan;
-
-		$clan->tag = $decodedResponse['tag'];
-		$clan->name = $decodedResponse['name'];
-		$clan->type = $decodedResponse['type'];
-		$clan->description = $decodedResponse['description'];
-		$clan->location_id = $decodedResponse['location']['id'];
-		$clan->badge_small = $decodedResponse['badgeUrls']['small'];
-		$clan->badge_medium = $decodedResponse['badgeUrls']['medium'];
-		$clan->badge_large = $decodedResponse['badgeUrls']['large'];
-		$clan->warFrequency = $decodedResponse['warFrequency'];
-		$clan->clanLevel = $decodedResponse['clanLevel'];
-		$clan->warWins = $decodedResponse['warWins'];
-		$clan->warWinStreak = $decodedResponse['warWinStreak'];
-		$clan->clanPoints = $decodedResponse['clanPoints'];
-		$clan->requiredTrophies = $decodedResponse['requiredTrophies'];
-		$clan->memberCount = $decodedResponse['members'];
-
-		return $clan;
 	}
 }

@@ -36,8 +36,7 @@
 		</div>
 	</form>
 	<ul class="nav menu">
-		<li id="nav-link-home"><a href="/"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> CoC Home</a></li>
-		<li id="nav-link-dashboard"><a href="/admin"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Dashboard</a></li>
+		<li id="nav-link-dashboard"><a href="/admin"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Admin Dashboard</a></li>
 		<li role="presentation" class="divider"></li>
 		@if( ! Auth::check())
 		<li id="nav-link-login"><a href="/admin/login"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Login Page</a></li>
@@ -45,5 +44,7 @@
 		@if(Auth::check() && Auth::user()->admin)
 		<li id="nav-link-create"><a href="/admin/create_admin_account"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Create Admin Account</a></li>
 		@endif
+		<li role="presentation" class="divider"></li>
+		<li id="nav-link-home"><a href="/"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Back to Site Home</a></li>
 	</ul>
 </div><!--/.sidebar-->
